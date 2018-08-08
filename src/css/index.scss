@@ -1,0 +1,21 @@
+.box{
+    background: rebeccapurple;
+    width: 100px;
+    height: 100px;
+}
+
+.box2{
+    background: url('../assets/img/1.jpg');
+    width: 100%;
+    height: 100px;
+}
+
+.img{
+    width: 100px;
+    height: 100px;
+
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}

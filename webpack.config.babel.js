@@ -9,10 +9,14 @@ let webpackConfig = {
     entry: './src/main.js',
     
     output: {
-        path: path.resolve(__dirname , 'dist'),
+        path: path.resolve(__dirname , 'dist/front'),
         filename: 'bundle.js'
     },
 
+    devServer: {
+        contentBase: ['dist'],
+        
+    },
 
     module: {
         rules: [
@@ -26,9 +30,21 @@ let webpackConfig = {
 
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+                use: ['style-loader', 'css-loader', 'sass-loader'],
                 include: [
                     path.resolve(__dirname, "src")
+                ]
+            },
+
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options:{
+                            limit: 8100
+                        }
+                    }
                 ]
             }
         ]
