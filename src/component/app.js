@@ -18,7 +18,7 @@ export default class extends React.Component{
     componentDidMount(){
         //http://loaclhost:8080
         axios.get('./assets/dialog/data.json')
-        .then(res => {
+        .then(res => { 
             this.setState({dialog: res})
         })
         .catch(err => {
