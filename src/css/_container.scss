@@ -1,0 +1,32 @@
+.container{
+    position: absolute;
+    top: 30px;
+    bottom:30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+
+    .header-box{
+        height: $header-height;
+        width: 100%;
+    }
+
+    .content-box{
+        position: absolute;
+        top: $header-height;
+        bottom: $footer-height;
+        background-color: #E8F9F6;
+        width: 100%;
+    }   
+
+    .footer-box{
+        position: absolute;
+        height: $footer-height;
+        bottom: 0;
+        width: 100%;
+    }
+
+}

@@ -1,16 +1,23 @@
 import path from 'path'
 import HtmlWebpackPlugin  from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+
 import webpack from 'webpack'
 
 let isDev = !(process.env.NODE_ENV === 'production')
 
 let webpackConfig = {
+
+    mode: isDev ? 'development': 'production',
     
     entry: './src/main.js',
     
     output: {
-        path: path.resolve(__dirname , 'dist/front'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname , 'dist'),
+        filename: 'bundle.js',
+        //publicPath: 'http://localhost:8080'
     },
 
     devServer: {
@@ -30,7 +37,12 @@ let webpackConfig = {
 
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [
+                    isDev ? 'style-loader':MiniCssExtractPlugin.loader,  //生产环境将css文件抽离
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ],
                 include: [
                     path.resolve(__dirname, "src")
                 ]
@@ -55,7 +67,16 @@ let webpackConfig = {
 
         new webpack.DefinePlugin({
             'process.env' : {NODE_ENV : JSON.stringify(process.env.NODE_ENV)}
-        })
+        }),
+
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        }),
+
+        new CleanWebpackPlugin(['dist']),
+
+        new CopyWebpackPlugin([{from: 'src/assets' , to: 'assets'}])
     ]
 }
 
